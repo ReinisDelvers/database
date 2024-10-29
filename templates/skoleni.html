@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="lv">
+    <head>
+        <title>{% block nosaukums %} Skolēnu lapa {% endblock %}</title>
+    </head>
+    <body>
+        <a href="/">Skolēni</a>
+        <a href = "/skolotaji">Skolotāji</a>
+        <a href = "/atzimes">Atzīmes</a>
+        <a href = "/tabula">Tabula</a>
+
+        <h1>Sveiki!</h1>
+
+        {% block saturs %}
+        <form>
+            <input type="text" id="name" name="name" placeholder="Vārds">
+            <input type="text" id="lastname" name="lastname" placeholder="Uzvārds">
+            <input type="submit" value="Pievienot!">
+        </form>
+        <table border="1">
+            <tr>
+              <th></th>
+              <th>Vārds</th>
+              <th>Uzvārds</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        {% endblock %}
+    </body>
+</html>
