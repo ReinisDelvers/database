@@ -4,13 +4,42 @@
 
 {% block saturs %}
 <form>
-    <table class="table">
+  <table class="table">
+    <tr>
+      <th>Vārds</th>
+      <th>Uzvārds</th>
+    </tr>
+    {% for viens in skoleni %}
+    <tr>
+      <td>{{viens[0]}}</td>
+      <td>{{viens[1]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <table class="table">
+    <tr>
+      <th>Vārds</th>
+      <th>Uzvārds</th>
+    </tr>
+    {% for viens in skolotaju %}
         <tr>
-          <th>Vārds</th>
-          <th>Uzvārds</th>
-          <th>Priekšmets</th>
-          <th>Vidējā atzīme</th>
+          <td>{{viens[0]}}</td>
+          <td>{{viens[1]}}</td>
         </tr>
-    </table>
+    {% endfor %}
+  </table>
+  <table class="table">
+    <tr>
+      <th>Skolēns</th>
+      <th>Priekšmets</th>
+      <th>Atzīme</th>
+    </tr>
+    {% for viens in atzime %}
+        <tr>
+          <td>{{viens[0]}}</td>
+          <td>{{viens[1]}}</td>
+        </tr>
+    {% endfor %}
+  </table>
 </form>    
 {% endblock %}

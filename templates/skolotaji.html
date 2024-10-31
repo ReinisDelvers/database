@@ -3,17 +3,22 @@
 {% block nosaukums %} Skolotaju lapa {% endblock %}
 
 {% block saturs %}
-<form>
-    <input type="text" id="name" name="name" placeholder="Vārds">
-    <input type="text" id="lastname" name="lastname" placeholder="Uzvārds">
-    <input type="text" id="subject" name="subject" placeholder="Priekšmets">
+<form method="post">
+    <input type="text" id="skvards" name="skvards" placeholder="Vārds">
+    <input type="text" id="skuzvards" name="skuzvards" placeholder="Uzvārds">
     <input type="submit" value="Pievienot!">
+    <h3>{{aizsutitais}}</h3>
     <table class="table">
         <tr>
           <th>Vārds</th>
           <th>Uzvārds</th>
-          <th>Priekšmets</th>
         </tr>
+        {% for viens in skolotaju %}
+            <tr>
+              <td>{{viens[0]}}</td>
+              <td>{{viens[1]}}</td>
+            </tr>
+        {% endfor %}
     </table>
 </form>    
 {% endblock %}

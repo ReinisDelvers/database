@@ -24,6 +24,12 @@
               <th>Vārds</th>
               <th>Uzvārds</th>
             </tr>
+            {% for viens in skoleni %}
+            <tr>
+              <td>{{viens[0]}}</td>
+              <td>{{viens[1]}}</td>
+            </tr>
+            {% endfor %}
           </table>
         {% endblock %}
     </body>
