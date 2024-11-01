@@ -9,13 +9,14 @@
         <a href="/">Skolēni</a>
         <a href = "/skolotaji">Skolotāji</a>
         <a href = "/atzimes">Atzīmes</a>
+        <a href = "/prieksmeti">Priekšmets</a>
         <a href = "/tabula">Tabula</a>
         <hr>
 
         {% block saturs %}
         <form method="post">
-            <input type="text" id="name" name="name" placeholder="Vārds">
-            <input type="text" id="lastname" name="lastname" placeholder="Uzvārds">
+            <input type="text" id="vards" name="vards" placeholder="Vārds">
+            <input type="text" id="uzvards" name="uzvards" placeholder="Uzvārds">
             <input type="submit" value="Pievienot!">
         </form>
         <h3>{{aizsutitais}}</h3>

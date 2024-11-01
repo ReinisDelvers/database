@@ -4,23 +4,32 @@
 
 {% block saturs %}
 <form method="post">
-    <select id="atsubject" name="atsubjct"></select>
-    <select id="atname" name="atname"></select>
-    <input type="number" id="grade" name="grade" placeholder="Atzīme" min="1" max="10">
-    <input type="submit" value="Pievienot!">
-    <h3>{{aizsutitais}}</h3>
-    <table class="table">
-        <tr>
-          <th>Skolēns</th>
-          <th>Priekšmets</th>
-          <th>Atzīme</th>
-        </tr>
-        {% for viens in atzime %}
-            <tr>
-              <td>{{viens[0]}}</td>
-              <td>{{viens[1]}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+  <select id="vards" name="vards">
+    {% for viens in skoleni %}
+      <option value="{{viens[0]}}">{{viens[1]}}</option>
+    {% endfor %}    
+  </select>
+  <select id="subject" name="subject">
+    {% for viens in prieksmeti %}
+      <option value="{{viens[0]}}">{{viens[1]}}</option>
+    {% endfor %}    
+  </select>
+  <input type="number" id="atzime" name="atzime" placeholder="Atzīme" min="1" max="10">
+  <input type="submit" value="Pievienot!">
+  <h3>{{aizsutitais}}</h3>
+  <table class="table">
+      <tr>
+        <th>Skolēns</th>
+        <th>Priekšmets</th>
+        <th>Atzīme</th>
+      </tr>
+      {% for viens in atzime %}
+          <tr>
+            <td>{{viens[0]}}</td>
+            <td>{{viens[1]}}</td>
+            <td>{{viens[2]}}</td>
+          </tr>
+      {% endfor %}
+  </table>
 </form>    
 {% endblock %}

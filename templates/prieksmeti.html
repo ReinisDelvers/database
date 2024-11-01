@@ -1,0 +1,21 @@
+{% extends 'skoleni.html'%}
+
+{% block nosaukums %} Prieksmetu lapa {% endblock %}
+
+{% block saturs %}
+<form method="post">
+    <input type="text" id="subject" name="subject" placeholder="Priekšmets">
+    <input type="submit" value="Pievienot!">
+    <h3>{{aizsutitais}}</h3>
+    <table class="table">
+        <tr>
+          <th>Priekšmets</th>
+        </tr>
+        {% for viens in prieksmeti %}
+            <tr>
+              <td>{{viens[0]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</form>    
+{% endblock %}
