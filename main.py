@@ -83,7 +83,9 @@ def tabula():
     skolenu_db = iegut_skolenus()
     skolotaju_db = iegut_skolotaju()
     atzime_db = iegut_atzime()
-    return render_template("tabula.html", atzime = atzime_db, skolotaju = skolotaju_db, skoleni = skolenu_db)
+    prieksmeti_db = iegut_prieksmeti()
+    prieksmetiunskolotaji_db = iegut_prieksmetiunskolotaji()
+    return render_template("tabula.html", atzime = atzime_db, skolotaju = skolotaju_db, skoleni = skolenu_db, prieksmeti = prieksmeti_db, prieksmetiunskolotaji = prieksmetiunskolotaji_db)
 
 if __name__ == '__main__':
     app.run(port = 5000)

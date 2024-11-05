@@ -124,7 +124,10 @@ def iegut_atzime():
     cur = conn.cursor()
     cur.execute(
         f"""
-        SELECT vards_id, subject_id, grade FROM atzime
+        SELECT vards, uzvards, subject, grade 
+        FROM
+        (atzime JOIN skoleni ON skoleni.id = atzime.vards_id)
+        JOIN prieksmeti ON prieksmeti.id = atzime.subject_id
         """
     )
     conn.commit()
@@ -146,7 +149,10 @@ def iegut_prieksmetiunskolotaji():
     cur = conn.cursor()
     cur.execute(
         f"""
-        SELECT vards_id, subject_id FROM prieksmetiunskolotaji
+        SELECT vards, uzvards, subject 
+        FROM
+        (prieksmetiunskolotaji JOIN skolotaju ON skolotaju.id = prieksmetiunskolotaji.vards_id)
+        JOIN prieksmeti ON prieksmeti.id = prieksmetiunskolotaji.subject_id
         """
     )
     conn.commit()
