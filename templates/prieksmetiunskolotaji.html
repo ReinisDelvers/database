@@ -1,11 +1,11 @@
 {% extends 'skoleni.html'%}
 
-{% block nosaukums %} Atzīmju lapa {% endblock %}
+{% block nosaukums %} Priekšmets un skolotāji {% endblock %}
 
 {% block saturs %}
 <form method="post">
   <select id="vards" name="vards">
-    {% for viens in skoleni %}
+    {% for viens in skolotaji %}
       <option value="{{viens[0]}}">{{viens[1]}} {{viens[2]}}</option>
     {% endfor %}    
   </select>
@@ -14,20 +14,17 @@
       <option value="{{viens[0]}}">{{viens[1]}}</option>
     {% endfor %}    
   </select>
-  <input type="number" id="atzime" name="atzime" placeholder="Atzīme" min="1" max="10">
   <input type="submit" value="Pievienot!">
   <h3>{{aizsutitais}}</h3>
   <table class="table">
       <tr>
-        <th>Skolēns</th>
+        <th>Skolotājs</th>
         <th>Priekšmets</th>
-        <th>Atzīme</th>
       </tr>
-      {% for viens in atzime %}
+      {% for viens in prieksmetiunskolotaji %}
           <tr>
             <td>{{viens[0]}}</td>
             <td>{{viens[1]}}</td>
-            <td>{{viens[2]}}</td>
           </tr>
       {% endfor %}
   </table>

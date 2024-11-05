@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id
+from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji
 import sqlite3
 
 conn = sqlite3.connect("dati.db")
@@ -61,6 +61,22 @@ def prieksmeti():
         dati = subject
         return render_template("prieksmeti.html", aizsutitais = dati, prieksmeti = prieksmeti_db)
     return render_template("prieksmeti.html", aizsutitais = "", prieksmeti = prieksmeti_db)
+
+@app.route("/prieksmetiunskolotaji", methods=["POST", "GET"])
+def prieksmetiunskolotaji():
+    prieksmetiunskolotaji_db = iegut_prieksmetiunskolotaji()
+    prieksmeti_id_db = iegut_prieksmeti_id()
+    skolotaji_id_db = iegut_skolotaji_id()
+
+    print(prieksmetiunskolotaji_db)
+    if request.method == "POST":
+        vards = request.form["vards"]
+        subject = request.form["subject"]
+        if vards and subject:
+            pievienot_prieksmetiunskolotaji(vards, subject)
+        dati = vards+" "+subject
+        return render_template("prieksmetiunskolotaji.html", aizsutitais = dati, prieksmetiunskolotaji = prieksmetiunskolotaji_db, skolotaji = skolotaji_id_db, prieksmeti = prieksmeti_id_db)
+    return render_template("prieksmetiunskolotaji.html", aizsutitais="", prieksmetiunskolotaji = prieksmetiunskolotaji_db, skolotaji = skolotaji_id_db, prieksmeti=prieksmeti_id_db)
 
 @app.route("/tabula", methods=["POST", "GET"])
 def tabula():
