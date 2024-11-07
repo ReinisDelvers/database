@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji
+from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji, iegut_videjas_atzimes
 import sqlite3
 
 conn = sqlite3.connect("dati.db")
@@ -11,8 +11,8 @@ def skoleni():
     skolenu_db = iegut_skolenus()
     print(skolenu_db)
     if request.method == "POST":
-        vards = request.form["vards"]
-        uzvards = request.form["uzvards"]
+        vards = request.form["vards"].capitalize()
+        uzvards = request.form["uzvards"].capitalize()
         if vards and uzvards:
           pievienot_skolenu(vards, uzvards)
         dati = vards+" "+uzvards
@@ -24,8 +24,8 @@ def skolotaju():
     skolotaju_db = iegut_skolotaju()
     print(skolotaju_db)
     if request.method == "POST":
-        vards = request.form["vards"]
-        uzvards = request.form["uzvards"]
+        vards = request.form["vards"].capitalize()
+        uzvards = request.form["uzvards"].capitalize()
         if vards and uzvards:
             pievienot_skolotaju(vards, uzvards)
         dati = vards+" "+uzvards
@@ -40,9 +40,9 @@ def atzime():
 
     print(atzime_db)
     if request.method == "POST":
-        vards = request.form["vards"]
-        subject = request.form["subject"]
-        atzime = request.form["atzime"]
+        vards = request.form["vards"].capitalize()
+        subject = request.form["subject"].capitalize()
+        atzime = request.form["atzime"].capitalize()
         if vards and subject and atzime:
             pievienot_atzime(vards, subject, atzime)
         dati = vards+" "+subject+" "+atzime
@@ -54,7 +54,7 @@ def prieksmeti():
     prieksmeti_db = iegut_prieksmeti()
     print(prieksmeti_db)
     if request.method == "POST":
-        subject = request.form["subject"]
+        subject = request.form["subject"].capitalize()
 
         if subject:
             pievienot_prieksmeti(subject)
@@ -70,8 +70,8 @@ def prieksmetiunskolotaji():
 
     print(prieksmetiunskolotaji_db)
     if request.method == "POST":
-        vards = request.form["vards"]
-        subject = request.form["subject"]
+        vards = request.form["vards"].capitalize()
+        subject = request.form["subject"].capitalize()
         if vards and subject:
             pievienot_prieksmetiunskolotaji(vards, subject)
         dati = vards+" "+subject
@@ -86,6 +86,11 @@ def tabula():
     prieksmeti_db = iegut_prieksmeti()
     prieksmetiunskolotaji_db = iegut_prieksmetiunskolotaji()
     return render_template("tabula.html", atzime = atzime_db, skolotaju = skolotaju_db, skoleni = skolenu_db, prieksmeti = prieksmeti_db, prieksmetiunskolotaji = prieksmetiunskolotaji_db)
+
+@app.route("/vidatzimes", methods=["POST", "GET"])
+def vidatzimes():
+    dati = iegut_videjas_atzimes()
+    return render_template("vidatzimes.html", vidatzimes = dati)
 
 if __name__ == '__main__':
     app.run(port = 5000)

@@ -191,3 +191,19 @@ def iegut_skolotaji_id():
     conn.commit()
     dati = cur.fetchall()
     return dati
+
+def iegut_videjas_atzimes():
+    cur = conn.cursor()
+    cur.execute(
+        f"""
+        SELECT skoleni.vards, skoleni.uzvards, prieksmeti.subject, AVG(atzime.grade), skoleni.id 
+        FROM
+        (skoleni LEFT JOIN atzime ON skoleni.id = atzime.vards_id)
+        LEFT JOIN prieksmeti ON prieksmeti.id = atzime.subject_id
+        GROUP BY skoleni.id, prieksmeti.id
+        ORDER BY skoleni.uzvards ASC
+        """
+    )
+    conn.commit()
+    dati = cur.fetchall()
+    return dati

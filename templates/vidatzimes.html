@@ -1,0 +1,24 @@
+{% extends 'skoleni.html'%}
+
+{% block nosaukums %} Vidējās atzīmes {% endblock %}
+
+{% block saturs %}
+<form method="post">
+    <table class="table">
+        <tr>
+          <th>Vārds</th>
+          <th>Uzvārds</th>
+          <th>Priekšmets</th>
+          <th>Vidējā atzīme</th>
+        </tr>
+        {% for viens in vidatzimes %}
+            <tr>
+              <td>{{viens[0]}}</td>
+              <td>{{viens[1]}}</td>
+              <td>{{viens[2]}}</td>
+              <td>{{viens[3]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</form>    
+{% endblock %}
