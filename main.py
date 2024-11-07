@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji, iegut_videjas_atzimes
+from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji, iegut_videjas_atzimes, dzest_skolenu
 import sqlite3
 
 conn = sqlite3.connect("dati.db")
@@ -91,6 +91,15 @@ def tabula():
 def vidatzimes():
     dati = iegut_videjas_atzimes()
     return render_template("vidatzimes.html", vidatzimes = dati)
+
+@app.route("/dzest", methods=["POST", "GET"])
+def dzest():
+    dati = iegut_skolenus()
+    if request.method == "POST":
+        skolena_id = request.form["skolens"]
+        dzest_skolenu(skolena_id)
+        return render_template("dzest.html", skoleni = dati)
+    return render_template("dzest.html", skoleni = dati)
 
 if __name__ == '__main__':
     app.run(port = 5000)

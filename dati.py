@@ -207,3 +207,15 @@ def iegut_videjas_atzimes():
     conn.commit()
     dati = cur.fetchall()
     return dati
+
+def dzest_skolenu(id):
+    cur = conn.cursor()
+    cur.execute(
+        f"""
+        DELETE FROM skoleni
+        WHERE id = "{id}"
+        """
+    )
+    conn.commit()
+    dati = cur.fetchall()
+    return dati

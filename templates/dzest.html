@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% block saturs %}
+<form method="post">
+    <select id="skolens" name="skolens">
+        {% for viens in skoleni %}
+          <option value="{{viens[0]}}">{{viens[1]}} {{viens[2]}}</option>
+        {% endfor %}    
+    </select>
+    <input type="submit" value="Dzest skolenu!">
+</form>
+{% endblock %}
