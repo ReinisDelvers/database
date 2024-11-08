@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji, iegut_videjas_atzimes, dzest_skolenu
+from dati import pievienot_skolenu, pievienot_skolotaju, pievienot_atzime, iegut_skolenus, iegut_skolotaju, iegut_atzime, iegut_prieksmeti, pievienot_prieksmeti, iegut_prieksmeti_id, iegut_skoleni_id, iegut_skolotaji_id, iegut_prieksmetiunskolotaji, pievienot_prieksmetiunskolotaji, iegut_videjas_atzimes, dzest_skolenu, dzest_skolotaju, dzest_prieksmeti
 import sqlite3
 
 conn = sqlite3.connect("dati.db")
@@ -85,21 +85,35 @@ def tabula():
     atzime_db = iegut_atzime()
     prieksmeti_db = iegut_prieksmeti()
     prieksmetiunskolotaji_db = iegut_prieksmetiunskolotaji()
-    return render_template("tabula.html", atzime = atzime_db, skolotaju = skolotaju_db, skoleni = skolenu_db, prieksmeti = prieksmeti_db, prieksmetiunskolotaji = prieksmetiunskolotaji_db)
+    vidatzimes_db = iegut_videjas_atzimes()
+    return render_template("tabula.html", atzime = atzime_db, skolotaju = skolotaju_db, skoleni = skolenu_db, prieksmeti = prieksmeti_db, prieksmetiunskolotaji = prieksmetiunskolotaji_db, vidatzimes = vidatzimes_db)
 
 @app.route("/vidatzimes", methods=["POST", "GET"])
 def vidatzimes():
-    dati = iegut_videjas_atzimes()
+    if request.method == "POST":
+        orderby = request.form["orderby"]
+        dati = iegut_videjas_atzimes(orderby)
+    else:
+        dati = iegut_videjas_atzimes()
     return render_template("vidatzimes.html", vidatzimes = dati)
 
 @app.route("/dzest", methods=["POST", "GET"])
 def dzest():
-    dati = iegut_skolenus()
+    skoleni = iegut_skoleni_id()
+    skolotaji = iegut_skolotaji_id()
+    prieksmeti = iegut_prieksmeti_id()
     if request.method == "POST":
-        skolena_id = request.form["skolens"]
-        dzest_skolenu(skolena_id)
-        return render_template("dzest.html", skoleni = dati)
-    return render_template("dzest.html", skoleni = dati)
+        if "dzestskolenu" in request.form:
+            skolena_id = request.form["skolens"]
+            dzest_skolenu(skolena_id)
+        elif "dzestskolotaju" in request.form:
+            skolotaju_id = request.form["skolotajs"]
+            dzest_skolotaju(skolotaju_id)
+        elif "dzestprieksmetu" in request.form:
+            prieksmeti_id = request.form["prieksmets"]
+            dzest_prieksmeti(prieksmeti_id)
+        return render_template("dzest.html", skoleni = skoleni, skolotaji = skolotaji, prieksmeti = prieksmeti)
+    return render_template("dzest.html", skoleni = skoleni, skolotaji = skolotaji, prieksmeti = prieksmeti)
 
 if __name__ == '__main__':
     app.run(port = 5000)

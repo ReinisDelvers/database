@@ -4,6 +4,7 @@
 
 {% block saturs %}
 <form>
+  <h1>Skolēni</h1>
   <table class="table">
     <tr>
       <th>Vārds</th>
@@ -16,6 +17,7 @@
     </tr>
     {% endfor %}
   </table>
+  <h1>Skolotāji</h1>
   <table class="table">
     <tr>
       <th>Vārds</th>
@@ -28,6 +30,31 @@
         </tr>
     {% endfor %}
   </table>
+  <h1>Priekšmeti</h1>
+  <table class="table">
+    <tr>
+      <th>Priekšmets</th>
+    </tr>
+    {% for viens in prieksmeti %}
+        <tr>
+          <td>{{viens[0]}}</td>
+        </tr>
+    {% endfor %}
+  </table>
+  <h1>Skolotāju priekšmetu</h1>
+  <table class="table">
+    <tr>
+      <th>Skolotājs</th>
+      <th>Priekšmets</th>
+    </tr>
+    {% for viens in prieksmetiunskolotaji %}
+        <tr>
+          <td>{{viens[0]}} {{viens[1]}}</td>
+          <td>{{viens[2]}}</td>
+        </tr>
+    {% endfor %}
+  </table>
+  <h1>Atzīmes</h1>
   <table class="table">
     <tr>
       <th>Skolēns</th>
@@ -42,27 +69,22 @@
         </tr>
     {% endfor %}
   </table>
+  <h1>Vidējās atzīmes</h1>
   <table class="table">
     <tr>
+      <th>Vārds</th>
+      <th>Uzvārds</th>
       <th>Priekšmets</th>
+      <th>Vidējā atzīme</th>
     </tr>
-    {% for viens in prieksmeti %}
+    {% for viens in vidatzimes %}
         <tr>
           <td>{{viens[0]}}</td>
+          <td>{{viens[1]}}</td>
+          <td>{{viens[2]}}</td>
+          <td>{{viens[3]}}</td>
         </tr>
     {% endfor %}
   </table>
-  <table class="table">
-    <tr>
-      <th>Skolotājs</th>
-      <th>Priekšmets</th>
-    </tr>
-    {% for viens in prieksmetiunskolotaji %}
-        <tr>
-          <td>{{viens[0]}} {{viens[1]}}</td>
-          <td>{{viens[2]}}</td>
-        </tr>
-    {% endfor %}
-</table>
 </form>    
 {% endblock %}

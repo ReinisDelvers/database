@@ -4,21 +4,27 @@
 
 {% block saturs %}
 <form method="post">
-    <table class="table">
-        <tr>
-          <th>Vārds</th>
-          <th>Uzvārds</th>
-          <th>Priekšmets</th>
-          <th>Vidējā atzīme</th>
-        </tr>
-        {% for viens in vidatzimes %}
-            <tr>
-              <td>{{viens[0]}}</td>
-              <td>{{viens[1]}}</td>
-              <td>{{viens[2]}}</td>
-              <td>{{viens[3]}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+  <select id="orderby" name="orderby">
+    <option value="skoleni.uzvards">Kārtot pēc skolēna uzvārda</option>
+    <option value="skoleni.vards">Kārtot pēc skolēna vārda</option>  
+    <option value="prieksmeti.subject">Kārtot pēc prieksmeta</option>  
+  </select>
+  <input type="submit" value="Sakārtot!">
+  <table class="table">
+      <tr>
+        <th>Vārds</th>
+        <th>Uzvārds</th>
+        <th>Priekšmets</th>
+        <th>Vidējā atzīme</th>
+      </tr>
+      {% for viens in vidatzimes %}
+          <tr>
+            <td>{{viens[0]}}</td>
+            <td>{{viens[1]}}</td>
+            <td>{{viens[2]}}</td>
+            <td>{{viens[3]}}</td>
+          </tr>
+      {% endfor %}
+  </table>
 </form>    
 {% endblock %}

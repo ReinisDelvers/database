@@ -192,7 +192,7 @@ def iegut_skolotaji_id():
     dati = cur.fetchall()
     return dati
 
-def iegut_videjas_atzimes():
+def iegut_videjas_atzimes(orderby="skoleni.uzvards"):
     cur = conn.cursor()
     cur.execute(
         f"""
@@ -201,7 +201,7 @@ def iegut_videjas_atzimes():
         (skoleni LEFT JOIN atzime ON skoleni.id = atzime.vards_id)
         LEFT JOIN prieksmeti ON prieksmeti.id = atzime.subject_id
         GROUP BY skoleni.id, prieksmeti.id
-        ORDER BY skoleni.uzvards ASC
+        ORDER BY {orderby} ASC
         """
     )
     conn.commit()
@@ -213,6 +213,30 @@ def dzest_skolenu(id):
     cur.execute(
         f"""
         DELETE FROM skoleni
+        WHERE id = "{id}"
+        """
+    )
+    conn.commit()
+    dati = cur.fetchall()
+    return dati
+
+def dzest_skolotaju(id):
+    cur = conn.cursor()
+    cur.execute(
+        f"""
+        DELETE FROM skolotaju
+        WHERE id = "{id}"
+        """
+    )
+    conn.commit()
+    dati = cur.fetchall()
+    return dati
+
+def dzest_prieksmeti(id):
+    cur = conn.cursor()
+    cur.execute(
+        f"""
+        DELETE FROM prieksmeti
         WHERE id = "{id}"
         """
     )
